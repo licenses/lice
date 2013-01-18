@@ -15,7 +15,7 @@ Generate a BSD-3 license, specifying the year and organization to be used, writi
 ## Arguments
 
 license
-    One of: apache, bsd2, bsd3, cddl, eclipse, gpl2, gpl3, lgpl, mit, moz, public. Defaults to bsd3 if not specified.
+    One of: apache, bsd2, bsd3, cc0, cddl, epl, gpl2, gpl3, lgpl, mit, mpl. Defaults to bsd3 if not specified.
 
 -y, --year
     The copyright year.
