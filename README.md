@@ -55,21 +55,21 @@ You can see what variables are available to you for any of the licenses:
 
 ## Usage
 
-usage: lice [-h] [-o ORGANIZATION] [-p PROJECT] [-t TEMPLATE_PATH] [-y YEAR]
-            [--vars] [license]
+    usage: lice [-h] [-o ORGANIZATION] [-p PROJECT] [-t TEMPLATE_PATH] [-y YEAR]
+                [--vars] [license]
 
-positional arguments:
-  license               the license to generate, one of: apache, bsd2, bsd3,
-                        cddl, cc0, epl, gpl2, gpl3, lgpl, mit, mpl
+    positional arguments:
+      license               the license to generate, one of: apache, bsd2, bsd3,
+                            cddl, cc0, epl, gpl2, gpl3, lgpl, mit, mpl
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -o ORGANIZATION, --org ORGANIZATION
-                        organization, defaults to .gitconfig or
-                        os.environ["USER"]
-  -p PROJECT, --proj PROJECT
-                        name of project, defaults to name of current directory
-  -t TEMPLATE_PATH, --template TEMPLATE_PATH
-                        path to license template file
-  -y YEAR, --year YEAR  copyright year
-  --vars                list template variables for specified license
+    optional arguments:
+      -h, --help            show this help message and exit
+      -o ORGANIZATION, --org ORGANIZATION
+                            organization, defaults to .gitconfig or
+                            os.environ["USER"]
+      -p PROJECT, --proj PROJECT
+                            name of project, defaults to name of current directory
+      -t TEMPLATE_PATH, --template TEMPLATE_PATH
+                            path to license template file
+      -y YEAR, --year YEAR  copyright year
+      --vars                list template variables for specified license
