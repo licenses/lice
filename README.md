@@ -11,7 +11,7 @@ Generate an MIT license:
 Generate a BSD-3 license, specifying the year and organization to be used, writing to *LICENSE*:
 
     $ lice -y 2012 -o "Sunlight Foundation" > LICENSE
-    
+
 ## Arguments
 
 license
@@ -19,7 +19,7 @@ license
 
 -y, --year
     The copyright year.
-    
+
 -o, --org
     The organization. Pulls your name from `git config` or `$USER` if not specified.
 
@@ -28,4 +28,3 @@ license
 
 -t, --template
     Path to a license template file. Overrides the license argument.
-    

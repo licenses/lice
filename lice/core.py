@@ -27,7 +27,7 @@ def guess_organization():
     """ Guess the organization from `git config`. If that can't be found,
         fall back to $USER environment variable.
     """
-    try:        
+    try:
         stdout = subprocess.check_output('git config --get user.name'.split())
         org = stdout.strip()
     except OSError:
@@ -75,9 +75,9 @@ def generate_license(template, context):
 
 
 def main():
-    
+
     parser = argparse.ArgumentParser(description='Generate a license')
-    
+
     parser.add_argument('license', metavar='license', nargs="?",
                        help='the license to generate, one of: %s' % ", ".join(LICENSES))
     parser.add_argument('-o', '--org', dest='organization',
@@ -92,41 +92,41 @@ def main():
                        help='list template variables for specified license')
 
     args = parser.parse_args()
-    
+
     # do license stuff
-    
+
     license = args.license or DEFAULT_LICENSE
 
     if license not in LICENSES:
         parser.error("license must be one of: %s" % ", ".join(LICENSES))
-        
+
     # list template vars if requested
-    
+
     if args.list_vars:
-        
+
         if args.template_path:
             template = load_file_template(args.template_path)
         else:
             template = load_package_template(license)
-        
+
         var_list = extract_vars(template)
-            
+
         if var_list:
             sys.stdout.write("The %s license template contains the following variables:\n" % (args.template_path or license))
             for v in var_list:
                 sys.stdout.write("  %s\n" % v)
         else:
             sys.stdout.write("The %s license template contains no variables.\n" % (args.template_path or license))
-        
+
         sys.exit(0)
 
     # check year, if specified
-        
+
     if args.year and not re.match(r"^\d{4}$", args.year):
         parser.error("-y must be a four digit year")
 
     # create context
-    
+
     context = {
         "year": args.year or "%i" % datetime.date.today().year,
         "organization": args.organization or guess_organization(),
@@ -137,7 +137,7 @@ def main():
         template = load_file_template(args.template_path)
     else:
         template = load_package_template(license)
-            
+
     content = generate_license(template, context)
     sys.stdout.write(content)
 
