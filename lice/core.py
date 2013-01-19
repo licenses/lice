@@ -14,6 +14,9 @@ DEFAULT_LICENSE = "bsd3"
 
 
 def clean_path(p):
+    """ Clean a path by expanding user and environment variables and
+        ensuring absolute path.
+    """
     p = os.path.expanduser(p)
     p = os.path.expandvars(p)
     p = os.path.abspath(p)
@@ -21,6 +24,9 @@ def clean_path(p):
 
 
 def guess_organization():
+    """ Guess the organization from `git config`. If that can't be found,
+        fall back to $USER environment variable.
+    """
     try:        
         stdout = subprocess.check_output('git config --get user.name'.split())
         org = stdout.strip()
@@ -30,6 +36,8 @@ def guess_organization():
 
 
 def load_file_template(path):
+    """ Load template from the specified filesystem path.
+    """
     if not os.path.exists(path):
         raise ValueError("path does not exist: %s" % path)
     with open(clean_path(path)) as infile:
@@ -38,12 +46,17 @@ def load_file_template(path):
 
 
 def load_package_template(license):
+    """ Load license template distributed with package.
+    """
     with resource_stream(__name__, 'template-%s.txt' % license) as licfile:
         content = licfile.read()
     return content
 
 
 def extract_vars(template):
+    """ Extract variables from template. Variables are enclosed in
+        double curly braces.
+    """
     keys = []
     for match in re.finditer(r"\{\{ (?P<key>\w+) \}\}", template):
         keys.append(match.groups()[0])
@@ -51,6 +64,9 @@ def extract_vars(template):
 
 
 def generate_license(template, context):
+    """ Generate a license by extracting variables from the template and
+        replacing them with the corresponding values in the given context.
+    """
     for key in extract_vars(template):
         if key not in context:
             raise ValueError("%s is missing from the template context" % key)
