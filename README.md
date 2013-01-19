@@ -1,4 +1,4 @@
-# lice: Generate license files for your projects
+# lice
 
 Lice generates license files. No more hunting down licenses from other projects.
 
