@@ -1,4 +1,4 @@
-from pkg_resources import resource_stream
+from pkg_resources import (resource_stream, resource_listdir)
 import argparse
 import datetime
 import re
@@ -8,8 +8,11 @@ import sys
 
 __version__ = "0.2"
 
-LICENSES = ["agpl3", "apache", "bsd2", "bsd3", "cddl", "cc0",
-            "epl", "gpl2", "gpl3", "lgpl", "mit", "mpl"]
+LICENSES = []
+for file in sorted(resource_listdir(__name__, '.')):
+    if file.startswith('template-'):
+        LICENSES.append(file[9:-4])
+
 DEFAULT_LICENSE = "bsd3"
 
 
@@ -76,17 +79,23 @@ def generate_license(template, context):
 
 def main():
 
+    def valid_year(string):
+        if not re.match(r"^\d{4}$", string):
+            raise argparse.ArgumentTypeError("Must be a four digit year")
+        return string
+
     parser = argparse.ArgumentParser(description='Generate a license')
 
-    parser.add_argument('license', metavar='license', nargs="?",
+    parser.add_argument('license', metavar='license', nargs="?", choices=LICENSES,
                        help='the license to generate, one of: %s' % ", ".join(LICENSES))
-    parser.add_argument('-o', '--org', dest='organization',
+    parser.add_argument('-o', '--org', dest='organization', default=guess_organization(),
                        help='organization, defaults to .gitconfig or os.environ["USER"]')
-    parser.add_argument('-p', '--proj', dest='project',
+    parser.add_argument('-p', '--proj', dest='project', default=os.getcwd().split(os.sep)[-1],
                        help='name of project, defaults to name of current directory')
     parser.add_argument('-t', '--template', dest='template_path',
                        help='path to license template file')
-    parser.add_argument('-y', '--year', dest='year',
+    parser.add_argument('-y', '--year', dest='year', type=valid_year,
+                       default="%i" % datetime.date.today().year,
                        help='copyright year')
     parser.add_argument('--vars', dest='list_vars', action="store_true",
                        help='list template variables for specified license')
@@ -96,9 +105,6 @@ def main():
     # do license stuff
 
     license = args.license or DEFAULT_LICENSE
-
-    if license not in LICENSES:
-        parser.error("license must be one of: %s" % ", ".join(LICENSES))
 
     # list template vars if requested
 
@@ -120,17 +126,12 @@ def main():
 
         sys.exit(0)
 
-    # check year, if specified
-
-    if args.year and not re.match(r"^\d{4}$", args.year):
-        parser.error("-y must be a four digit year")
-
     # create context
 
     context = {
-        "year": args.year or "%i" % datetime.date.today().year,
-        "organization": args.organization or guess_organization(),
-        "project": args.project or os.getcwd().split(os.sep)[-1],
+        "year": args.year,
+        "organization": args.organization,
+        "project": args.project,
     }
 
     if args.template_path:
