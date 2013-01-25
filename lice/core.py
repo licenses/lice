@@ -10,8 +10,9 @@ __version__ = "0.2"
 
 LICENSES = []
 for file in sorted(resource_listdir(__name__, '.')):
-    if file.startswith('template-'):
-        LICENSES.append(file[9:-4])
+    match = re.match(r'template-([a-z0-9]+).txt', file)
+    if match:
+        LICENSES.append(match.groups()[0])
 
 DEFAULT_LICENSE = "bsd3"
 
@@ -24,6 +25,14 @@ def clean_path(p):
     p = os.path.expandvars(p)
     p = os.path.abspath(p)
     return p
+
+
+def get_context(args):
+    return {
+        "year": args.year,
+        "organization": args.organization,
+        "project": args.project,
+    }
 
 
 def guess_organization():
@@ -122,9 +131,7 @@ def main():
                 sys.stderr.write("Sorry, no source headers are available for %s.\n" % args.license)
                 sys.exit(1)
 
-        context = {}
-
-        content = generate_license(template, context)
+        content = generate_license(template, get_context(args))
         sys.stdout.write(content)
 
         sys.exit(0)
@@ -151,18 +158,12 @@ def main():
 
     # create context
 
-    context = {
-        "year": args.year,
-        "organization": args.organization,
-        "project": args.project,
-    }
-
     if args.template_path:
         template = load_file_template(args.template_path)
     else:
         template = load_package_template(license)
 
-    content = generate_license(template, context)
+    content = generate_license(template, get_context(args))
     sys.stdout.write(content)
 
 

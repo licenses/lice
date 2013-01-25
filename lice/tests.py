@@ -51,6 +51,29 @@ class TestTemplates(unittest.TestCase):
 
             self.assertEqual(rendered, generate_license(template, context))
 
+    def test_license_header(self):
+
+        context = {
+            "year": "1981",
+            "project": "lice",
+            "organization": "Awesome Co.",
+        }
+
+        for license in LICENSES:
+
+            try:
+
+                template = load_package_template(license, header=True)
+
+                rendered = template.replace("{{ year }}", context["year"])
+                rendered = rendered.replace("{{ project }}", context["project"])
+                rendered = rendered.replace("{{ organization }}", context["organization"])
+
+                self.assertEqual(rendered, generate_license(template, context))
+
+            except IOError:
+                pass  # it's okay to not find templates
+
 
 if __name__ == '__main__':
     unittest.main()
