@@ -48,10 +48,11 @@ def load_file_template(path):
     return template
 
 
-def load_package_template(license):
+def load_package_template(license, header=False):
     """ Load license template distributed with package.
     """
-    with resource_stream(__name__, 'template-%s.txt' % license) as licfile:
+    filename = 'template-%s-header.txt' if header else 'template-%s.txt'
+    with resource_stream(__name__, filename % license) as licfile:
         content = licfile.read()
     return content
 
@@ -88,6 +89,8 @@ def main():
 
     parser.add_argument('license', metavar='license', nargs="?", choices=LICENSES,
                        help='the license to generate, one of: %s' % ", ".join(LICENSES))
+    parser.add_argument('--header', dest='header', action="store_true",
+                       help='generate source file header for specified license')
     parser.add_argument('-o', '--org', dest='organization', default=guess_organization(),
                        help='organization, defaults to .gitconfig or os.environ["USER"]')
     parser.add_argument('-p', '--proj', dest='project', default=os.getcwd().split(os.sep)[-1],
@@ -105,6 +108,26 @@ def main():
     # do license stuff
 
     license = args.license or DEFAULT_LICENSE
+
+    # generate header if requested
+
+    if args.header:
+
+        if args.template_path:
+            template = load_file_template(args.template_path)
+        else:
+            try:
+                template = load_package_template(license, header=True)
+            except IOError:
+                sys.stderr.write("Sorry, no source headers are available for %s.\n" % args.license)
+                sys.exit(1)
+
+        context = {}
+
+        content = generate_license(template, context)
+        sys.stdout.write(content)
+
+        sys.exit(0)
 
     # list template vars if requested
 
