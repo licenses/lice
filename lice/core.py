@@ -1,4 +1,4 @@
-from pkg_resources import resource_stream
+from pkg_resources import (resource_stream, resource_listdir)
 import argparse
 import datetime
 import re
@@ -8,8 +8,11 @@ import sys
 
 __version__ = "0.2"
 
-LICENSES = ["agpl3", "apache", "bsd2", "bsd3", "cddl", "cc0",
-            "epl", "gpl2", "gpl3", "lgpl", "mit", "mpl"]
+LICENSES = []
+for file in sorted(resource_listdir(__name__, '.')):
+    if file.startswith('template-'):
+        LICENSES.append(file[9:-4])
+
 DEFAULT_LICENSE = "bsd3"
 
 
