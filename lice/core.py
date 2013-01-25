@@ -8,8 +8,8 @@ import sys
 
 __version__ = "0.1"
 
-LICENSES = ["apache", "bsd2", "bsd3", "cddl", "cc0", "epl",
-            "gpl2", "gpl3", "lgpl", "mit", "mpl"]
+LICENSES = ["agpl3", "apache", "bsd2", "bsd3", "cddl", "cc0",
+            "epl", "gpl2", "gpl3", "lgpl", "mit", "mpl"]
 DEFAULT_LICENSE = "bsd3"
 
 
