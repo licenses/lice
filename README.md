@@ -59,8 +59,8 @@ You can see what variables are available to you for any of the licenses:
                 [--vars] [license]
 
     positional arguments:
-      license               the license to generate, one of: apache, bsd2, bsd3,
-                            cddl, cc0, epl, gpl2, gpl3, lgpl, mit, mpl
+      license               the license to generate, one of: agpl3, apache, bsd2,
+                            bsd3, cddl, cc0, epl, gpl2, gpl3, lgpl, mit, mpl
 
     optional arguments:
       -h, --help            show this help message and exit
