@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 LICENSES = ["agpl3", "apache", "bsd2", "bsd3", "cddl", "cc0",
             "epl", "gpl2", "gpl3", "lgpl", "mit", "mpl"]

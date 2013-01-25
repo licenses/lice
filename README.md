@@ -73,3 +73,15 @@ You can see what variables are available to you for any of the licenses:
                             path to license template file
       -y YEAR, --year YEAR  copyright year
       --vars                list template variables for specified license
+
+
+## Changelog
+
+### 0.2
+
+* Add AGPL 3 license
+* Add extra templates variables to GPL 2 and 3
+
+### 0.1
+
+* Initial release
