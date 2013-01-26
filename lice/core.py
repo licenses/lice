@@ -5,6 +5,7 @@ import re
 import os
 import subprocess
 import sys
+import getpass
 
 __version__ = "0.2"
 
@@ -43,7 +44,7 @@ def guess_organization():
         stdout = subprocess.check_output('git config --get user.name'.split())
         org = stdout.strip()
     except OSError:
-        org = os.environ["USER"]
+        org = getpass.getuser()
     return org
 
 
