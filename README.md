@@ -53,6 +53,11 @@ You can see what variables are available to you for any of the licenses:
       organization
 
 
+## I want _________ license in here!
+
+Great! Is it a license that is commonly used? If so, open an issue or, if you are feeling generous, fork and submit a pull request.
+
+
 ## Usage
 
     usage: lice [-h] [-o ORGANIZATION] [-p PROJECT] [-t TEMPLATE_PATH] [-y YEAR]
@@ -76,6 +81,12 @@ You can see what variables are available to you for any of the licenses:
 
 
 ## Changelog
+
+### 0.3
+
+* Generate source file headers for some liceneses
+* Discover available licenses at runtime
+* Use getpass module for retrieving username
 
 ### 0.2
 
