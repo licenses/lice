@@ -45,7 +45,7 @@ def guess_organization():
         org = stdout.strip()
     except OSError:
         org = getpass.getuser()
-    return org
+    return org.decode("UTF-8")
 
 
 def load_file_template(path):
@@ -132,7 +132,7 @@ def main():
                 sys.stderr.write("Sorry, no source headers are available for %s.\n" % args.license)
                 sys.exit(1)
 
-        content = generate_license(template, get_context(args))
+        content = generate_license(template.decode("UTF-8"), get_context(args))
         sys.stdout.write(content)
 
         sys.exit(0)
@@ -164,7 +164,7 @@ def main():
     else:
         template = load_package_template(license)
 
-    content = generate_license(template, get_context(args))
+    content = generate_license(template.decode("UTF-8"), get_context(args))
     sys.stdout.write(content)
 
 
