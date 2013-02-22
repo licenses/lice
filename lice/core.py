@@ -43,7 +43,7 @@ def guess_organization():
     try:
         stdout = subprocess.check_output('git config --get user.name'.split())
         org = stdout.strip()
-    except OSError:
+    except:
         org = getpass.getuser()
     return org.decode("UTF-8")
 
