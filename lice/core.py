@@ -11,7 +11,7 @@ __version__ = "0.2"
 
 LICENSES = []
 for file in sorted(resource_listdir(__name__, '.')):
-    match = re.match(r'template-([a-z0-9]+).txt', file)
+    match = re.match(r'template-([a-z0-9_]+).txt', file)
     if match:
         LICENSES.append(match.groups()[0])
 
