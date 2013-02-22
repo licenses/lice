@@ -82,11 +82,13 @@ Great! Is it a license that is commonly used? If so, open an issue or, if you ar
 
 ## Changelog
 
-### 0.3
+### 0.3 (in progress)
 
 * Generate source file headers for some liceneses
 * Discover available licenses at runtime
 * Use getpass module for retrieving username
+* Better unicode support for Python 3 (thanks to `astagi <https://github.com/astagi>`_)
+* Add Creative Commons licenese (thanks to `rjnienaber <https://github.com/rjnienaber>`_)
 
 ### 0.2
 
