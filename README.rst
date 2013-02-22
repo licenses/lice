@@ -1,20 +1,24 @@
-# lice
+====
+lice
+====
 
 Lice generates license files. No more hunting down licenses from other projects.
 
 
-## Installation
-
+Installation
+------------
+::
     easy_install lice
 
 or
-
+::
     pip install lice
 
 
-## Overview
+Overview
+--------
 
-Generate a BSD-3 license, the default:
+Generate a BSD-3 license, the default::
 
     $ lice
     Copyright (c) 2013, Jeremy Carbaugh
@@ -24,7 +28,7 @@ Generate a BSD-3 license, the default:
     Redistribution and use in source and binary forms, with or without modification,
     ...
 
-Generate an MIT license:
+Generate an MIT license::
 
     $ lice mit
     The MIT License (MIT)
@@ -33,7 +37,7 @@ Generate an MIT license:
     Permission is hereby granted, free of charge, to any person obtaining a copy
     ...
 
-Generate a BSD-3 license, specifying the year and organization to be used:
+Generate a BSD-3 license, specifying the year and organization to be used::
 
     $ lice -y 2012 -o "Sunlight Foundation"
     Copyright (c) 2012, Sunlight Foundation
@@ -45,7 +49,7 @@ Generate a BSD-3 license, specifying the year and organization to be used:
 
 If organization is not specified, lice will first attempt to use `git config` to find your name. If not found, it will use the value of the $USER environment variable. If the project name is not specified, the name of the current directory is used. Year will default to the current year.
 
-You can see what variables are available to you for any of the licenses:
+You can see what variables are available to you for any of the licenses::
 
     $ lice --vars mit
     The mit license template contains the following variables:
@@ -53,12 +57,15 @@ You can see what variables are available to you for any of the licenses:
       organization
 
 
-## I want _________ license in here!
+I want XXXXXXXXX license in here!
+---------------------------------
 
 Great! Is it a license that is commonly used? If so, open an issue or, if you are feeling generous, fork and submit a pull request.
 
 
-## Usage
+Usage
+-----
+::
 
     usage: lice [-h] [-o ORGANIZATION] [-p PROJECT] [-t TEMPLATE_PATH] [-y YEAR]
                 [--vars] [license]
@@ -80,9 +87,11 @@ Great! Is it a license that is commonly used? If so, open an issue or, if you ar
       --vars                list template variables for specified license
 
 
-## Changelog
+Changelog
+---------
 
-### 0.3 (in progress)
+0.3
+~~~
 
 * Generate source file headers for some liceneses
 * Discover available licenses at runtime
@@ -90,11 +99,13 @@ Great! Is it a license that is commonly used? If so, open an issue or, if you ar
 * Better unicode support for Python 3 (thanks to `astagi <https://github.com/astagi>`_)
 * Add Creative Commons licenese (thanks to `rjnienaber <https://github.com/rjnienaber>`_)
 
-### 0.2
+0.2
+~~~
 
 * Add AGPL 3 license
 * Add extra templates variables to GPL 2 and 3
 
-### 0.1
+0.1
+~~~
 
 * Initial release
