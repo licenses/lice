@@ -1,1 +1,1 @@
-include LICENSE README.md lice/template-*.txt
+include LICENSE README.rst lice/template-*.txt
