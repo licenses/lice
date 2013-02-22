@@ -7,11 +7,13 @@ Lice generates license files. No more hunting down licenses from other projects.
 
 Installation
 ------------
-::
+
+About what you'd expect::
+
     easy_install lice
 
-or
-::
+or::
+
     pip install lice
 
 
@@ -90,8 +92,7 @@ Usage
 Changelog
 ---------
 
-0.3
-~~~
+**0.3**
 
 * Generate source file headers for some liceneses
 * Discover available licenses at runtime
@@ -99,13 +100,11 @@ Changelog
 * Better unicode support for Python 3 (thanks to `astagi <https://github.com/astagi>`_)
 * Add Creative Commons licenese (thanks to `rjnienaber <https://github.com/rjnienaber>`_)
 
-0.2
-~~~
+**0.2**
 
 * Add AGPL 3 license
 * Add extra templates variables to GPL 2 and 3
 
-0.1
-~~~
+**0.1**
 
 * Initial release
