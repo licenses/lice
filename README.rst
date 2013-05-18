@@ -92,6 +92,10 @@ Usage
 Changelog
 ---------
 
+**0.4** (in development)
+
+* Use ASCII instead of Unicode for templates (thanks to `tabletcorry <https://github.com/tabletcorry>`_)
+
 **0.3**
 
 * Generate source file headers for some liceneses

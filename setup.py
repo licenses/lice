@@ -8,7 +8,7 @@ setup(
     version=__version__,
     author="Jeremy Carbaugh",
     author_email="jcarbaugh@gmail.com",
-    url='https://github.com/jcarbaugh/lice',
+    url='https://github.com/licenses/lice',
     description='Generate a license file for a project',
     long_description=long_description,
     license='BSD',
