@@ -95,6 +95,7 @@ Changelog
 **0.4** (in development)
 
 * Use ASCII instead of Unicode for templates (thanks to `tabletcorry <https://github.com/tabletcorry>`_)
+* Added Academic Free License ("AFL") v. 3.0 (thanks to `brianray <https://github.com/brianray>`_)  
 
 **0.3**
 
