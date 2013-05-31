@@ -29,9 +29,9 @@ class TestTemplates(unittest.TestCase):
 
     def test_extract_vars(self):
         for license in LICENSES:
-            template = """Oh hey, {{ this }} is a {{ template }} test."""
+            template = b"""Oh hey, {{ this }} is a {{ template }} test."""
             var_list = extract_vars(template)
-            self.assertEquals(var_list, ["this", "template"])
+            self.assertEquals(var_list, [b"this", b"template"])
 
     def test_license(self):
 
