@@ -64,7 +64,7 @@ def load_package_template(license, header=False):
     filename = 'template-%s-header.txt' if header else 'template-%s.txt'
     with resource_stream(__name__, filename % license) as licfile:
         content = licfile.read()
-    return content
+    return content.decode('utf-8')
 
 
 def extract_vars(template):
@@ -72,7 +72,7 @@ def extract_vars(template):
         double curly braces.
     """
     keys = []
-    for match in re.finditer(b"\{\{ (?P<key>\w+) \}\}", template):
+    for match in re.finditer(r"\{\{ (?P<key>\w+) \}\}", template):
         keys.append(match.groups()[0])
     return keys
 

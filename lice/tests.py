@@ -18,7 +18,8 @@ class TestTemplates(unittest.TestCase):
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
-                self.assertEqual(infile.read(), load_file_template(path))
+                content = infile.read()
+                self.assertEqual(content, load_file_template(path))
 
     def test_package_template(self):
         pwd = os.path.abspath(os.path.dirname(__file__))
@@ -29,9 +30,9 @@ class TestTemplates(unittest.TestCase):
 
     def test_extract_vars(self):
         for license in LICENSES:
-            template = b"""Oh hey, {{ this }} is a {{ template }} test."""
+            template = """Oh hey, {{ this }} is a {{ template }} test."""
             var_list = extract_vars(template)
-            self.assertEquals(var_list, [b"this", b"template"])
+            self.assertEquals(var_list, ["this", "template"])
 
     def test_license(self):
 
