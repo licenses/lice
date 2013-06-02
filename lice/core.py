@@ -7,7 +7,6 @@ import subprocess
 import sys
 import getpass
 
-__version__ = "0.3"
 
 LICENSES = []
 for file in sorted(resource_listdir(__name__, '.')):
