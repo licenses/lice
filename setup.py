@@ -27,7 +27,7 @@ setup(
     platforms=['any'],
     test_suite='lice.tests.collector',
     classifiers=[
-        'Development Status :: 5 - Production',
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: BSD License',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
