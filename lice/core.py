@@ -73,7 +73,7 @@ def extract_vars(template):
     keys = set()
     for match in re.finditer(r"\{\{ (?P<key>\w+) \}\}", template):
         keys.add(match.groups()[0])
-    return list(keys)
+    return sorted(list(keys))
 
 
 def generate_license(template, context):

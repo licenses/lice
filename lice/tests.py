@@ -40,7 +40,7 @@ class TestTemplates(unittest.TestCase):
         for license in LICENSES:
             template = """Oh hey, {{ this }} is a {{ template }} test."""
             var_list = extract_vars(template)
-            self.assertEquals(var_list, ["this", "template"])
+            self.assertEquals(var_list, ["template", "this"])
 
     def test_license(self):
 
