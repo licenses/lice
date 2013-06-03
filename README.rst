@@ -92,7 +92,7 @@ Usage
 Changelog
 ---------
 
-**0.4** (in development)
+**0.4**
 
 * Use ASCII instead of Unicode for templates (thanks to `tabletcorry <https://github.com/tabletcorry>`_)
 * Add Academic Free License ("AFL") v. 3.0 (thanks to `brianray <https://github.com/brianray>`_)
