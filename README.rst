@@ -98,6 +98,7 @@ Changelog
 * Add Academic Free License ("AFL") v. 3.0 (thanks to `brianray <https://github.com/brianray>`_)
 * Add ISC (thanks to `masklinn <https://github.com/masklinn>`_)
 * Add tox support for testing (thanks to `lukaszb <https://github.com/lukaszb>`_)
+* Show defaults when listing template variables
 
 **0.3**
 

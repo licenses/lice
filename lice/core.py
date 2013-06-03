@@ -140,6 +140,8 @@ def main():
 
     if args.list_vars:
 
+        context = get_context(args)
+
         if args.template_path:
             template = load_file_template(args.template_path)
         else:
@@ -148,9 +150,12 @@ def main():
         var_list = extract_vars(template)
 
         if var_list:
-            sys.stdout.write("The %s license template contains the following variables:\n" % (args.template_path or license))
+            sys.stdout.write("The %s license template contains the following variables and defaults:\n" % (args.template_path or license))
             for v in var_list:
-                sys.stdout.write("  %s\n" % v)
+                if v in context:
+                    sys.stdout.write("  %s = %s\n" % (v, context[v]))
+                else:
+                    sys.stdout.write("  %s\n" % v)
         else:
             sys.stdout.write("The %s license template contains no variables.\n" % (args.template_path or license))
 
