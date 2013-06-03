@@ -70,10 +70,10 @@ def extract_vars(template):
     """ Extract variables from template. Variables are enclosed in
         double curly braces.
     """
-    keys = []
+    keys = set()
     for match in re.finditer(r"\{\{ (?P<key>\w+) \}\}", template):
-        keys.append(match.groups()[0])
-    return list(set(keys))
+        keys.add(match.groups()[0])
+    return list(keys)
 
 
 def generate_license(template, context):
