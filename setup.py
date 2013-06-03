@@ -7,6 +7,7 @@ long_description = open('README.rst').read()
 extra_kwargs = {}
 if sys.version_info < (2, 7):
     extra_kwargs['setup_requires'] = ['argparse>=1.2', 'unittest2']
+    extra_kwargs['install_requires'] = ['argparse>=1.2']
 if sys.version_info >= (3,):
     extra_kwargs['setup_requires'] = ['setuptools']
 
