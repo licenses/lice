@@ -168,7 +168,12 @@ def main():
     else:
         template = load_package_template(license)
 
-    content = generate_license(template.decode("UTF-8"), get_context(args))
+    # python 3 doesn't need UTF-8 decoding
+
+    if sys.version_info[0] < 3:
+        content = generate_license(template.decode("UTF-8"), get_context(args))
+    else:
+        content = generate_license(template, get_context(args))
     sys.stdout.write(content)
 
 
