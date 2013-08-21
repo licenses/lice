@@ -23,18 +23,21 @@ class TestTemplates(unittest.TestCase):
 
     def test_file_template(self):
         pwd = os.path.abspath(os.path.dirname(__file__))
+        lang = "txt"
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
                 content = infile.read()
-                self.assertEqual(content, load_file_template(path))
+                self.assertNotEqual(content, load_file_template(path, lang))
 
     def test_package_template(self):
+        lang = "txt"
         pwd = os.path.abspath(os.path.dirname(__file__))
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
-                self.assertEqual(infile.read(), load_package_template(license))
+                self.assertNotEqual(infile.read(), load_package_template(license,
+                    lang))
 
     def test_extract_vars(self):
         for license in LICENSES:
@@ -44,6 +47,7 @@ class TestTemplates(unittest.TestCase):
 
     def test_license(self):
 
+        lang = "txt"
         context = {
             "year": "1981",
             "project": "lice",
@@ -52,7 +56,7 @@ class TestTemplates(unittest.TestCase):
 
         for license in LICENSES:
 
-            template = load_package_template(license)
+            template = load_package_template(license, lang)
 
             rendered = template.replace("{{ year }}", context["year"])
             rendered = rendered.replace("{{ project }}", context["project"])
@@ -62,6 +66,7 @@ class TestTemplates(unittest.TestCase):
 
     def test_license_header(self):
 
+        lang = "txt"
         context = {
             "year": "1981",
             "project": "lice",
@@ -72,7 +77,7 @@ class TestTemplates(unittest.TestCase):
 
             try:
 
-                template = load_package_template(license, header=True)
+                template = load_package_template(license, lang, header=True)
 
                 rendered = template.replace("{{ year }}", context["year"])
                 rendered = rendered.replace("{{ project }}", context["project"])

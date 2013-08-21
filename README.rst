@@ -49,6 +49,31 @@ Generate a BSD-3 license, specifying the year and organization to be used::
     Redistribution and use in source and binary forms, with or without modification,
     ...
 
+Generate a BSD-3 license, formatted for python source file::
+    
+    $ lice -l py
+
+    # Copyright (c) 2012, Sunlight Foundation
+    #
+    # All rights reserved.
+    #
+    # Redistribution and use in source and binary forms, with or without modification,
+    ...
+
+Generate a python source file with a BSD-3 license commented in the header::
+    
+    $ lice -l py -f test
+    $ ls
+    test.py
+    $ cat test.py
+
+    # Copyright (c) 2012, Sunlight Foundation
+    #
+    # All rights reserved.
+    #
+    # Redistribution and use in source and binary forms, with or without modification,
+    ...
+
 If organization is not specified, lice will first attempt to use `git config` to find your name. If not found, it will use the value of the $USER environment variable. If the project name is not specified, the name of the current directory is used. Year will default to the current year.
 
 You can see what variables are available to you for any of the licenses::
@@ -86,6 +111,11 @@ Usage
       -t TEMPLATE_PATH, --template TEMPLATE_PATH
                             path to license template file
       -y YEAR, --year YEAR  copyright year
+      -l LANGUAGE, --language LANGUAGE
+                            format output for language source file, one of cc,
+                            lua, c, txt, pl, sh, rb, py
+      -f OFILE, --file OFILE Name of the output source file (whitout extension,
+                            use -l instead)
       --vars                list template variables for specified license
 
 
