@@ -1,4 +1,5 @@
 from lice.core import *
+from io import StringIO
 import os
 try:
     import unittest2 as unittest
@@ -40,8 +41,9 @@ class TestTemplates(unittest.TestCase):
                     lang))
 
     def test_extract_vars(self):
+        template = StringIO()
         for license in LICENSES:
-            template = """Oh hey, {{ this }} is a {{ template }} test."""
+            template.write(u'Oh hey, {{ this }} is a {{ template }} test.')
             var_list = extract_vars(template)
             self.assertEquals(var_list, ["template", "this"])
 
@@ -49,28 +51,30 @@ class TestTemplates(unittest.TestCase):
 
         lang = "txt"
         context = {
-            "year": "1981",
-            "project": "lice",
-            "organization": "Awesome Co.",
+            "year": u'1981',
+            "project": u'lice',
+            "organization": u'Awesome Co.'
         }
 
         for license in LICENSES:
 
             template = load_package_template(license, lang)
+            content = template.getvalue()
 
-            rendered = template.replace("{{ year }}", context["year"])
-            rendered = rendered.replace("{{ project }}", context["project"])
-            rendered = rendered.replace("{{ organization }}", context["organization"])
+            content = content.replace(u'{{ year }}', context["year"])
+            content = content.replace(u'{{ project }}', context["project"])
+            content = content.replace(u'{{ organization }}', context["organization"])
 
-            self.assertEqual(rendered, generate_license(template, context))
+            self.assertEqual(content, generate_license(template, context).getvalue())
+            template.close() # discard memory
 
     def test_license_header(self):
 
         lang = "txt"
         context = {
-            "year": "1981",
-            "project": "lice",
-            "organization": "Awesome Co.",
+            "year": u'1981',
+            "project": u'lice',
+            "organization": u'Awesome Co.'
         }
 
         for license in LICENSES:
@@ -78,12 +82,14 @@ class TestTemplates(unittest.TestCase):
             try:
 
                 template = load_package_template(license, lang, header=True)
+                content = template.getvalue()
 
-                rendered = template.replace("{{ year }}", context["year"])
-                rendered = rendered.replace("{{ project }}", context["project"])
-                rendered = rendered.replace("{{ organization }}", context["organization"])
+                content = content.replace(u'{{ year }}', context["year"])
+                content = content.replace(u'{{ project }}', context["project"])
+                content = content.replace(u'{{ organization }}', context["organization"])
 
-                self.assertEqual(rendered, generate_license(template, context))
+                self.assertEqual(content, generate_license(template, context).getvalue())
+                template.close() # discard memory
 
             except IOError:
                 pass  # it's okay to not find templates
