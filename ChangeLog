@@ -1,3 +1,5 @@
+2013-08-23 Alessandro Cresto Miseroglio <alex179ohm@gmail.com>
+		* core.py Unicode fixed (python 2.7 and 3.3 tested)
 
 2013-08-23 Alessandro Cresto Miseroglio <alex179ohm@gmail.com>
 		* core.py File name for a source file was added.

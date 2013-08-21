@@ -20,8 +20,8 @@ DEFAULT_LICENSE = "bsd3"
 LANGS = {"txt": "text", "c": "c", "cc": "c", "py": "unix", "pl": "unix",
     "sh": "unix", "lua": "lua", "rb": "unix"}
 
-LANG_CMT = {"text": ["", "", ""], "c": ["/*", "*", "*/"], "unix": ["", "#", ""],
-    "lua": ["---", "--", ""]}
+LANG_CMT = {"text": [u'', u'', u''], "c": [u'/*', u'*', u'*/'], "unix": [u'', u'#', u''],
+    "lua": [u'---', u'--', u'']}
 
 
 def clean_path(p):
@@ -61,11 +61,11 @@ def load_file_template(path, lang):
     if not os.path.exists(path):
         raise ValueError("path does not exist: %s" % path)
     with open(clean_path(path), "rb") as infile: # opened as binary
-        template.write(LANG_CMT[LANGS[lang]][0] + '\n')
+        template.write(LANG_CMT[LANGS[lang]][0] + u'\n')
         for line in infile:
-            template.write(LANG_CMT[LANGS[lang]][1] + ' ')
+            template.write(LANG_CMT[LANGS[lang]][1] + u' ')
             template.write(line.decode("utf-8")) # ensure utf-8 encoding
-        template.write(LANG_CMT[LANGS[lang]][2] + '\n')
+        template.write(LANG_CMT[LANGS[lang]][2] + u'\n')
     return template
 
 
@@ -75,11 +75,11 @@ def load_package_template(license, lang, header=False):
     content = StringIO()
     filename = 'template-%s-header.txt' if header else 'template-%s.txt'
     with resource_stream(__name__, filename % license) as licfile:
-        content.write(LANG_CMT[LANGS[lang]][0] + '\n')
+        content.write(LANG_CMT[LANGS[lang]][0] + u'\n')
         for line in licfile:
-            content.write(LANG_CMT[LANGS[lang]][1] + ' ')
+            content.write(LANG_CMT[LANGS[lang]][1] + u' ')
             content.write(line.decode("utf-8"))
-        content.write(LANG_CMT[LANGS[lang]][2] + '\n')
+        content.write(LANG_CMT[LANGS[lang]][2] + u'\n')
     return content
 
 
