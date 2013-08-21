@@ -4,7 +4,6 @@ lice
 
 Lice generates license files. No more hunting down licenses from other projects.
 
-
 Installation
 ------------
 

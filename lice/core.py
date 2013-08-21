@@ -17,6 +17,30 @@ for file in sorted(resource_listdir(__name__, '.')):
 
 DEFAULT_LICENSE = "bsd3"
 
+
+# To extend language formatting sopport with a new language, add an item in
+# LANGS dict:
+# "language_suffix":"comment_name"
+# where "language_suffix" is the suffix of your language and "comment_name" is
+# one of the comment types supported and listed in LANG_CMT:
+# text : no comment
+# c    : /* * */
+# unix : #
+# lua  : --- --
+
+# if you want add a new comment type just add an item to LANG_CMT:
+# "comment_name":[u'string', u'string', u'string']
+# where the first string open multiline comment, second string comment every
+# license's line and the last string close multiline comment,
+# associate your language and source file suffix with your new comment type
+# how explained above.
+# EXAMPLE:
+# LANG_CMT = {"c":[u'/*', u'*', u'*/']}
+# LANGS = {"cpp":"c"}
+# (for more examples see LANG_CMT and langs dicts below)
+# NOTE: unicode (u) in comment strings is required.
+
+
 LANGS = {"txt": "text", "c": "c", "cc": "c", "py": "unix", "pl": "unix",
     "sh": "unix", "lua": "lua", "rb": "unix"}
 
