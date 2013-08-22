@@ -111,8 +111,9 @@ Usage
                             path to license template file
       -y YEAR, --year YEAR  copyright year
       -l LANGUAGE, --language LANGUAGE
-                            format output for language source file, one of cc,
-                            lua, c, txt, pl, sh, rb, py
+                            format output for language source file, one of: js, f,
+                            css, c, m, java, py, cc, h, html, lua, erl, rb, sh,
+                            f90, hpp, cpp, pl, txt
       -f OFILE, --file OFILE Name of the output source file (whitout extension,
                             use -l instead)
       --vars                list template variables for specified license
