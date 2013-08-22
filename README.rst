@@ -1,6 +1,8 @@
 ====
 lice
-====
+====           
+.. image:: https://travis-ci.org/alex179ohm/lice.png?branch=docs  :target: https://travis-ci.org/alex179ohm/lice
+
 
 Lice generates license files. No more hunting down licenses from other projects.
 
