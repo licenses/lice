@@ -41,11 +41,16 @@ DEFAULT_LICENSE = "bsd3"
 # NOTE: unicode (u) in comment strings is required.
 
 
-LANGS = {"txt": "text", "c": "c", "cc": "c", "py": "unix", "pl": "unix",
-    "sh": "unix", "lua": "lua", "rb": "unix"}
+LANGS = {"txt": "text", "h": "c", "hpp": "c", "c": "c", "cc": "c", "cpp": "c",
+        "py": "unix", "pl": "perl", "sh": "unix", "lua": "lua", "rb": "ruby",
+        "js": "c", "java": "java", "f": "fortran", "f90": "fortran90",
+        "erl": "erlang", "html": "html", "css": "c", "m": "c"}
 
-LANG_CMT = {"text": [u'', u'', u''], "c": [u'/*', u'*', u'*/'], "unix": [u'', u'#', u''],
-    "lua": [u'---', u'--', u'']}
+LANG_CMT = {"text": [u'', u'', u''], "c": [u'/*', u' *', u' */'], "unix": [u'', u'#', u''],
+        "lua": [u'--[[', u'', u'--]]'], "java": [u'/**', u' *', u' */'],
+        "perl": [u'=item', u'', u'=cut'], "ruby": [u'=begin', u'', u'=end'],
+        "fortran": [u'C', u'C', u'C'], "fortran90": [u'!*', u'!*', u'!*'],
+        "erlang": [u'%%', u'%', u'%%'], "html": [u'<!--', u'', u'-->']}
 
 
 def clean_path(p):
@@ -155,7 +160,7 @@ def main():
                        default="%i" % datetime.date.today().year,
                        help='copyright year')
     parser.add_argument('-l', '--language', dest='language', default='txt',
-                       help='format output for language source file, one of %s' % ", ".join(LANGS.keys()))
+                       help='format output for language source file, one of: %s' % ", ".join(LANGS.keys()))
     parser.add_argument('-f', '--file', dest='ofile', default='stdout',
                        help='Name of the output source file (whitout extension, use -l instead)')
     parser.add_argument('--vars', dest='list_vars', action="store_true",
