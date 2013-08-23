@@ -131,7 +131,8 @@ def generate_license(template, context):
     return out
 
 def format_license(template, lang):
-    """ Format the license for specified language source file
+    """ Format the StringIO template object for specified lang string:
+        return StringIO object formatted
     """
     out = StringIO()
     template.seek(0) # from the start of the buffer
@@ -143,6 +144,18 @@ def format_license(template, lang):
     template.close() # force garbage collector
     return out
 
+def get_suffix(name):
+    """Check if file name have valid suffix for formatting.
+       if have suffix return it else return False.
+    """
+    a = name.count(".")
+    if a:
+        ext = name.split(".")[-1]
+        if ext in LANGS.keys():
+            return ext
+        return False
+    else:
+        return False
 
 def main():
 
@@ -236,15 +249,23 @@ def main():
         template = load_package_template(license)
 
     content = generate_license(template, get_context(args))
-    out = format_license(content, lang)
 
-    out.seek(0)
     if args.ofile != "stdout":
-        output = "%s.%s" % (args.ofile, lang)
+        ext = get_suffix(args.ofile)
+        if ext:
+            output = args.ofile
+            out = format_license(content, ext) # format licese by file suffix
+        else:
+            output = "%s.%s" % (args.ofile, lang)
+            out = format_license(content, lang)
+
+        out.seek(0)
         with open(output, "w") as f:
             f.write(out.getvalue())
         f.close()
     else:
+        out = format_license(content, lang)
+        out.seek(0)
         sys.stdout.write(out.getvalue())
     out.close() # free content memory (paranoic memory stuff)
 
