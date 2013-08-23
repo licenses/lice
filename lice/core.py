@@ -83,32 +83,26 @@ def guess_organization():
     return org.decode("UTF-8")
 
 
-def load_file_template(path, lang):
+def load_file_template(path):
     """ Load template from the specified filesystem path.
     """
     template = StringIO()
     if not os.path.exists(path):
         raise ValueError("path does not exist: %s" % path)
     with open(clean_path(path), "rb") as infile: # opened as binary
-        template.write(LANG_CMT[LANGS[lang]][0] + u'\n')
         for line in infile:
-            template.write(LANG_CMT[LANGS[lang]][1] + u' ')
-            template.write(line.decode("utf-8")) # ensure utf-8 encoding
-        template.write(LANG_CMT[LANGS[lang]][2] + u'\n')
+            template.write(line.decode("utf-8")) # ensure utf-8
     return template
 
 
-def load_package_template(license, lang, header=False):
+def load_package_template(license, header=False):
     """ Load license template distributed with package.
     """
     content = StringIO()
     filename = 'template-%s-header.txt' if header else 'template-%s.txt'
     with resource_stream(__name__, filename % license) as licfile:
-        content.write(LANG_CMT[LANGS[lang]][0] + u'\n')
         for line in licfile:
-            content.write(LANG_CMT[LANGS[lang]][1] + u' ')
-            content.write(line.decode("utf-8"))
-        content.write(LANG_CMT[LANGS[lang]][2] + u'\n')
+            content.write(line.decode("utf-8")) # write utf-8 string
     return content
 
 
@@ -134,6 +128,19 @@ def generate_license(template, context):
         content = content.replace("{{ %s }}" % key, context[key])
     template.close() # free template memory (when is garbage collected?)
     out.write(content)
+    return out
+
+def format_license(template, lang):
+    """ Format the license for specified language source file
+    """
+    out = StringIO()
+    template.seek(0) # from the start of the buffer
+    out.write(LANG_CMT[LANGS[lang]][0] + u'\n')
+    for line in template.readlines():
+        out.write(LANG_CMT[LANGS[lang]][1] + u' ')
+        out.write(line)
+    out.write(LANG_CMT[LANGS[lang]][2] + u'\n')
+    template.close() # force garbage collector
     return out
 
 
@@ -181,18 +188,19 @@ def main():
     if args.header:
 
         if args.template_path:
-            template = load_file_template(args.template_path, lang)
+            template = load_file_template(args.template_path)
         else:
             try:
-                template = load_package_template(license, lang, header=True)
+                template = load_package_template(license, header=True)
             except IOError:
                 sys.stderr.write("Sorry, no source headers are available for %s.\n" % args.license)
                 sys.exit(1)
 
         content = generate_license(template, get_context(args))
-        content.seek(0)
-        sys.stdout.write(content.getvalue())
-        content.close() # free content memory (paranoic memory stuff)
+        out = format_license(content, lang)
+        out.seek(0)
+        sys.stdout.write(out.getvalue())
+        out.close() # free content memory (paranoic memory stuff)
         sys.exit(0)
 
     # list template vars if requested
@@ -202,9 +210,9 @@ def main():
         context = get_context(args)
 
         if args.template_path:
-            template = load_file_template(args.template_path, lang)
+            template = load_file_template(args.template_path)
         else:
-            template = load_package_template(license, lang)
+            template = load_package_template(license)
 
         var_list = extract_vars(template)
 
@@ -223,21 +231,22 @@ def main():
     # create context
 
     if args.template_path:
-        template = load_file_template(args.template_path, lang)
+        template = load_file_template(args.template_path)
     else:
-        template = load_package_template(license, lang)
+        template = load_package_template(license)
 
     content = generate_license(template, get_context(args))
+    out = format_license(content, lang)
 
-    content.seek(0)
+    out.seek(0)
     if args.ofile != "stdout":
         output = "%s.%s" % (args.ofile, lang)
         with open(output, "w") as f:
-            f.write(content.getvalue())
+            f.write(out.getvalue())
         f.close()
     else:
-        sys.stdout.write(content.getvalue())
-    content.close() # free content memory (paranoic memory stuff)
+        sys.stdout.write(out.getvalue())
+    out.close() # free content memory (paranoic memory stuff)
 
 if __name__ == "__main__":
     main()

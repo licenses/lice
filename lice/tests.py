@@ -24,21 +24,18 @@ class TestTemplates(unittest.TestCase):
 
     def test_file_template(self):
         pwd = os.path.abspath(os.path.dirname(__file__))
-        lang = "txt"
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
                 content = infile.read()
-                self.assertNotEqual(content, load_file_template(path, lang))
+                self.assertEqual(content, load_file_template(path).getvalue())
 
     def test_package_template(self):
-        lang = "txt"
         pwd = os.path.abspath(os.path.dirname(__file__))
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
-                self.assertNotEqual(infile.read(), load_package_template(license,
-                    lang))
+                self.assertEqual(infile.read(), load_package_template(license).getvalue())
 
     def test_extract_vars(self):
         template = StringIO()
@@ -49,7 +46,6 @@ class TestTemplates(unittest.TestCase):
 
     def test_license(self):
 
-        lang = "txt"
         context = {
             "year": u'1981',
             "project": u'lice',
@@ -58,7 +54,7 @@ class TestTemplates(unittest.TestCase):
 
         for license in LICENSES:
 
-            template = load_package_template(license, lang)
+            template = load_package_template(license)
             content = template.getvalue()
 
             content = content.replace(u'{{ year }}', context["year"])
@@ -70,7 +66,6 @@ class TestTemplates(unittest.TestCase):
 
     def test_license_header(self):
 
-        lang = "txt"
         context = {
             "year": u'1981',
             "project": u'lice',
@@ -81,7 +76,7 @@ class TestTemplates(unittest.TestCase):
 
             try:
 
-                template = load_package_template(license, lang, header=True)
+                template = load_package_template(license, header=True)
                 content = template.getvalue()
 
                 content = content.replace(u'{{ year }}', context["year"])
