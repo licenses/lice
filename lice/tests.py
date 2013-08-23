@@ -19,19 +19,6 @@ class TestPaths(unittest.TestCase):
         self.assertEqual(clean_path("$HOME"), os.environ["HOME"])
         self.assertEqual(clean_path("~"), os.environ["HOME"])
 
-    def test_suffix(self):
-
-        suffixes = {
-            "test.py": "py",
-            "foo.test.html": "html",
-            "test": False,
-            "foo.test.help": False
-            }
-        
-        for i in suffixes:
-            self.assertEqual(suffixes[i][1], get_suffix(suffixes[i][0]))
-
-
 class TestTemplates(unittest.TestCase):
 
     def test_file_template(self):
