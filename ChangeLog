@@ -1,0 +1,23 @@
+2013-08-23 Alessandro Cresto Miseroglio <alex179ohm@gmail.com>
+		* core.py Unicode fixed (python 2.7 and 3.3 tested)
+
+2013-08-23 Alessandro Cresto Miseroglio <alex179ohm@gmail.com>
+		* core.py File name for a source file was added.
+			main (parser.add_argument [135]) -f (ofile) argument added
+
+2013-08-22 Alessandro Cresto Miseroglio <alex179ohm@gmail.com>
+		* core.py (lice) Formatted output for source file programs
+			was added.
+		    languages implemented  "lua, py, c, cc, pl, rb, sh, txt"
+			load_file_template (template) If template is StringIO, unicode
+				is supported in native mode (both 2.7[maibe] and 3.3)
+			load_package_template (content) StringIO support added
+				content.decode("utf-8") was removed
+			main (parser.add_argument [133]) -l (language) argument added
+			[20..24] LANGS and LANG_CMT added.
+		
+		* test.py  some tests was changed (maibe become unnecessary)
+			test_file_template [31] assertEqual changed in assertNotEqual
+			test_package_template [39] assertEqual changed in assertNotEqual
+
+
