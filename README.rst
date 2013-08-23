@@ -74,6 +74,18 @@ Generate a python source file with a BSD-3 license commented in the header::
     # Redistribution and use in source and binary forms, with or without modification,
     ...
 
+Generate a source file (language detected by -f  extension)::
+
+    $ lice -f test.c && cat test.c
+    /*
+     * Copyright (c) 2012, Sunlight Foundation
+     *
+     * All rights reserved.
+     *
+     * Redistribution and use in source and binary forms, with or without modification,
+    ...
+
+
 If organization is not specified, lice will first attempt to use `git config` to find your name. If not found, it will use the value of the $USER environment variable. If the project name is not specified, the name of the current directory is used. Year will default to the current year.
 
 You can see what variables are available to you for any of the licenses::
@@ -114,10 +126,8 @@ Usage
       -l LANGUAGE, --language LANGUAGE
                             format output for language source file, one of: js, f,
                             css, c, m, java, py, cc, h, html, lua, erl, rb, sh,
-                            f90, hpp, cpp, pl, txt [default is not comment
-                            formatting (txt)]
-      -f OFILE, --file OFILE Name of the output source file (whitout extension,
-                            use -l instead)
+                            f90, hpp, cpp, pl, txt [default is not formatted (txt)]
+      -f OFILE, --file OFILE Name of the output source file (with -l, extension can be omitted)
       --vars                list template variables for specified license
 
 

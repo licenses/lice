@@ -180,9 +180,9 @@ def main():
                        default="%i" % datetime.date.today().year,
                        help='copyright year')
     parser.add_argument('-l', '--language', dest='language', default='txt',
-                       help='format output for language source file, one of: %s [default is not comment formatting (txt)]' % ", ".join(LANGS.keys()))
+                       help='format output for language source file, one of: %s [default is not formatted (txt)]' % ", ".join(LANGS.keys()))
     parser.add_argument('-f', '--file', dest='ofile', default='stdout',
-                       help='Name of the output source file (whitout extension, use -l instead)')
+                       help='Name of the output source file (with -l, extension can be ommitted)')
     parser.add_argument('--vars', dest='list_vars', action="store_true",
                        help='list template variables for specified license')
 
