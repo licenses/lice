@@ -1,0 +1,3 @@
+[submodule "lice/license-templates"]
+	path = lice/license-templates
+	url = https://github.com/licenses/license-templates.git
