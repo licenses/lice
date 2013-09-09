@@ -24,7 +24,7 @@ class TestTemplates(unittest.TestCase):
     def test_file_template(self):
         pwd = os.path.abspath(os.path.dirname(__file__))
         for license in LICENSES:
-            path = os.path.join(pwd, "%s.txt" % license)
+            path = os.path.join("license-templates", "templates", "%s.txt" % license)
             with open(path) as infile:
                 content = infile.read()
                 self.assertEqual(content, load_file_template(path).getvalue())
@@ -32,7 +32,7 @@ class TestTemplates(unittest.TestCase):
     def test_package_template(self):
         pwd = os.path.abspath(os.path.dirname(__file__))
         for license in LICENSES:
-            path = os.path.join(pwd, "%s.txt" % license)
+            path = os.path.join("license-templates", "templates", "%s.txt" % license)
             with open(path) as infile:
                 self.assertEqual(infile.read(), load_package_template(license).getvalue())
 
