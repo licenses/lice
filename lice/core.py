@@ -179,7 +179,7 @@ def main():
     parser.add_argument('-y', '--year', dest='year', type=valid_year,
                        default="%i" % datetime.date.today().year,
                        help='copyright year')
-    parser.add_argument('-l', '--language', dest='language', default='txt',
+    parser.add_argument('-l', '--language', dest='language', default=None,
                        help='format output for language source file, one of: %s [default is not formatted (txt)]' % ", ".join(LANGS.keys()))
     parser.add_argument('-f', '--file', dest='ofile', default='stdout',
                        help='Name of the output source file (with -l, extension can be ommitted)')
@@ -195,7 +195,7 @@ def main():
     # language
 
     lang = args.language
-
+ 
     # generate header if requested
 
     if args.header:
@@ -256,7 +256,11 @@ def main():
             output = args.ofile
             out = format_license(content, ext) # format licese by file suffix
         else:
-            output = "%s.%s" % (args.ofile, lang)
+            if (lang != None):
+                output = "%s.%s" % (args.ofile, lang) 
+            else:
+                output = "%s" % args.ofile
+                lang = 'txt'
             out = format_license(content, lang)
 
         out.seek(0)
