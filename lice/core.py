@@ -44,13 +44,17 @@ DEFAULT_LICENSE = "bsd3"
 LANGS = {"txt": "text", "h": "c", "hpp": "c", "c": "c", "cc": "c", "cpp": "c",
         "py": "unix", "pl": "perl", "sh": "unix", "lua": "lua", "rb": "ruby",
         "js": "c", "java": "java", "f": "fortran", "f90": "fortran90",
-        "erl": "erlang", "html": "html", "css": "c", "m": "c"}
+        "erl": "erlang", "html": "html", "css": "c", "m": "c",
+        "hs": "haskell", "idr": "haskell", "clj": "lisp", "lisp": "lisp",
+        "agda": "haskell", "ml": "ml", "el": "lisp", "php": "c"}
 
 LANG_CMT = {"text": [u'', u'', u''], "c": [u'/*', u' *', u' */'], "unix": [u'', u'#', u''],
         "lua": [u'--[[', u'', u'--]]'], "java": [u'/**', u' *', u' */'],
         "perl": [u'=item', u'', u'=cut'], "ruby": [u'=begin', u'', u'=end'],
         "fortran": [u'C', u'C', u'C'], "fortran90": [u'!*', u'!*', u'!*'],
-        "erlang": [u'%%', u'%', u'%%'], "html": [u'<!--', u'', u'-->']}
+        "erlang": [u'%%', u'%', u'%%'], "html": [u'<!--', u'', u'-->'],
+        "haskell": [u'{-', u'', u'-}'], "lisp": [u'', u';;', u''],
+        "ml": [u'(*', u'', u'*)']}
 
 
 def clean_path(p):
@@ -195,6 +199,12 @@ def main():
     # language
 
     lang = args.language
+    if lang not in LANGS.keys():
+      sys.stderr.write("I do not know about a language ending with "
+                       "extension %s.\n"
+                       "Please send a pull request adding this language to\n"
+                       "https://github.com/licenses/lice. Thanks!\n" % lang)
+      sys.exit(1)
  
     # generate header if requested
 
