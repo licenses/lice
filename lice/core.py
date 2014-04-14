@@ -189,6 +189,8 @@ def main():
                        help='Name of the output source file (with -l, extension can be ommitted)')
     parser.add_argument('--vars', dest='list_vars', action="store_true",
                        help='list template variables for specified license')
+    parser.add_argument('--licenses', dest='list_licenses', action="store_true",
+                       help='list available license templates and their parameters')
 
     args = parser.parse_args()
 
@@ -249,6 +251,14 @@ def main():
         else:
             sys.stdout.write("The %s license template contains no variables.\n" % (args.template_path or license))
 
+        sys.exit(0)
+
+    if args.list_licenses:
+        context = get_context(args)
+        for license in LICENSES:
+            template = load_package_template(license)
+            var_list = extract_vars(template)
+            sys.stdout.write("%s : %s\n" % (license, ", ".join(var_list)))
         sys.exit(0)
 
     # create context
