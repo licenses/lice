@@ -191,6 +191,8 @@ def main():
                        help='list template variables for specified license')
     parser.add_argument('--licenses', dest='list_licenses', action="store_true",
                        help='list available license templates and their parameters')
+    parser.add_argument('--languages', dest='list_languages', action="store_true",
+                       help='list available source code formatting languages')
 
     args = parser.parse_args()
 
@@ -207,7 +209,7 @@ def main():
                        "Please send a pull request adding this language to\n"
                        "https://github.com/licenses/lice. Thanks!\n" % lang)
       sys.exit(1)
- 
+
     # generate header if requested
 
     if args.header:
@@ -253,12 +255,20 @@ def main():
 
         sys.exit(0)
 
+    # list available licenses and their template variables
+
     if args.list_licenses:
-        context = get_context(args)
         for license in LICENSES:
             template = load_package_template(license)
             var_list = extract_vars(template)
             sys.stdout.write("%s : %s\n" % (license, ", ".join(var_list)))
+        sys.exit(0)
+
+    # list available source formatting languages
+
+    if args.list_languages:
+        for lang in sorted(LANGS.keys()):
+            sys.stdout.write("%s\n" % lang)
         sys.exit(0)
 
     # create context
@@ -277,7 +287,7 @@ def main():
             out = format_license(content, ext) # format licese by file suffix
         else:
             if (lang != None):
-                output = "%s.%s" % (args.ofile, lang) 
+                output = "%s.%s" % (args.ofile, lang)
             else:
                 output = "%s" % args.ofile
                 lang = 'txt'
