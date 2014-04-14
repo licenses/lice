@@ -46,7 +46,7 @@ LANGS = {"txt": "text", "h": "c", "hpp": "c", "c": "c", "cc": "c", "cpp": "c",
         "js": "c", "java": "java", "f": "fortran", "f90": "fortran90",
         "erl": "erlang", "html": "html", "css": "c", "m": "c",
         "hs": "haskell", "idr": "haskell", "clj": "lisp", "lisp": "lisp",
-        "agda": "haskell", "ml": "ml", "el": "lisp"}
+        "agda": "haskell", "ml": "ml", "el": "lisp", "php": "c"}
 
 LANG_CMT = {"text": [u'', u'', u''], "c": [u'/*', u' *', u' */'], "unix": [u'', u'#', u''],
         "lua": [u'--[[', u'', u'--]]'], "java": [u'/**', u' *', u' */'],
