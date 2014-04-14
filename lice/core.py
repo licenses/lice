@@ -199,6 +199,12 @@ def main():
     # language
 
     lang = args.language
+    if lang not in LANGS.keys():
+      sys.stderr.write("I do not know about a language ending with "
+                       "extension %s.\n"
+                       "Please send a pull request adding this language to\n"
+                       "https://github.com/licenses/lice. Thanks!\n" % lang)
+      sys.exit(1)
  
     # generate header if requested
 
