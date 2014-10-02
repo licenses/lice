@@ -19,6 +19,7 @@ class TestPaths(unittest.TestCase):
         self.assertEqual(clean_path("$HOME"), os.environ["HOME"])
         self.assertEqual(clean_path("~"), os.environ["HOME"])
 
+
 class TestTemplates(unittest.TestCase):
 
     def test_file_template(self):
@@ -34,7 +35,8 @@ class TestTemplates(unittest.TestCase):
         for license in LICENSES:
             path = os.path.join(pwd, "template-%s.txt" % license)
             with open(path) as infile:
-                self.assertEqual(infile.read(), load_package_template(license).getvalue())
+                self.assertEqual(infile.read(),
+                                 load_package_template(license).getvalue())
 
     def test_extract_vars(self):
         template = StringIO()
@@ -58,10 +60,12 @@ class TestTemplates(unittest.TestCase):
 
             content = content.replace(u'{{ year }}', context["year"])
             content = content.replace(u'{{ project }}', context["project"])
-            content = content.replace(u'{{ organization }}', context["organization"])
+            content = content.replace(u'{{ organization }}',
+                                      context["organization"])
 
-            self.assertEqual(content, generate_license(template, context).getvalue())
-            template.close() # discard memory
+            self.assertEqual(content,
+                             generate_license(template, context).getvalue())
+            template.close()  # discard memory
 
     def test_license_header(self):
 
@@ -80,10 +84,12 @@ class TestTemplates(unittest.TestCase):
 
                 content = content.replace(u'{{ year }}', context["year"])
                 content = content.replace(u'{{ project }}', context["project"])
-                content = content.replace(u'{{ organization }}', context["organization"])
+                content = content.replace(u'{{ organization }}',
+                                          context["organization"])
 
-                self.assertEqual(content, generate_license(template, context).getvalue())
-                template.close() # discard memory
+                self.assertEqual(
+                    content, generate_license(template, context).getvalue())
+                template.close()  # discard memory
 
             except IOError:
                 pass  # it's okay to not find templates
