@@ -3,6 +3,8 @@ python:
   - "2.6"
   - "2.7"
   - "3.3"
+  - "3.4"
+  - "3.5"
   - "pypy"
 install:
   - python setup.py install
@@ -10,3 +12,4 @@ script: nosetests
 notifications:
     email:
         - jcarbaugh@gmail.com
+        - ejmr@plutono.com
