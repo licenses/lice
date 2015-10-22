@@ -70,6 +70,7 @@ LANGS = {
     "pl": "perl",
     "py": "unix",
     "rb": "ruby",
+    "rs": "c",
     "scm": "lisp",
     "sh": "unix",
     "txt": "text",
