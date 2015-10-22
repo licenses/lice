@@ -42,6 +42,7 @@ DEFAULT_LICENSE = "bsd3"
 
 
 LANGS = {
+    "ada": "ada",
     "agda": "haskell",
     "c": "c",
     "cc": "c",
@@ -73,6 +74,7 @@ LANGS = {
 }
 
 LANG_CMT = {
+    "ada": [u'', u'--', u''],
     "c": [u'/*', u' *', u' */'],
     "erlang": [u'%%', u'%', u'%%'],
     "fortran": [u'C', u'C', u'C'],
