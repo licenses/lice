@@ -49,6 +49,7 @@ LANGS = {
     "cc": "c",
     "clj": "lisp",
     "cpp": "c",
+    "cs": "c",
     "css": "c",
     "el": "lisp",
     "erl": "erlang",
