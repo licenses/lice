@@ -44,6 +44,7 @@ DEFAULT_LICENSE = "bsd3"
 LANGS = {
     "ada": "ada",
     "agda": "haskell",
+    "asm": "asm",
     "c": "c",
     "cc": "c",
     "clj": "lisp",
@@ -78,6 +79,7 @@ LANGS = {
 
 LANG_CMT = {
     "ada": [u'', u'--', u''],
+    "asm": [u'', u';;;', u''],
     "c": [u'/*', u' *', u' */'],
     "erlang": [u'%%', u'%', u'%%'],
     "fortran": [u'C', u'C', u'C'],
