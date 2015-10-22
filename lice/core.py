@@ -55,6 +55,7 @@ LANGS = {
     "erl": "erlang",
     "f": "fortran",
     "f90": "fortran90",
+    "fs": "go",
     "fth": "forth",
     "go": "go",
     "h": "c",
