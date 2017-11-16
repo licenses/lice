@@ -114,10 +114,13 @@ def guess_organization():
     """
     try:
         stdout = subprocess.check_output('git config --get user.name'.split())
-        org = stdout.strip()
+        org = stdout.strip().decode("UTF-8")
     except:
         org = getpass.getuser()
-    return org.decode("UTF-8")
+        if sys.version_info[0] == 2:
+            # only decode when python version is 2.x
+            org = org.decode("UTF-8")
+    return org
 
 
 def load_file_template(path):
@@ -172,6 +175,8 @@ def format_license(template, lang):
     """ Format the StringIO template object for specified lang string:
         return StringIO object formatted
     """
+    if not lang:
+        lang = 'txt'
     out = StringIO()
     template.seek(0)  # from the start of the buffer
     out.write(LANG_CMT[LANGS[lang]][0] + u'\n')
@@ -225,7 +230,7 @@ def main():
         '-y', '--year', dest='year', type=valid_year,
         default="%i" % datetime.date.today().year, help='copyright year')
     parser.add_argument(
-        '-l', '--language', dest='language', default='txt',
+        '-l', '--language', dest='language',
         help='format output for language source file, one of: %s [default is '
         'not formatted (txt)]' % ', '.join(LANGS.keys()))
     parser.add_argument(
@@ -251,7 +256,7 @@ def main():
     # language
 
     lang = args.language
-    if lang not in LANGS.keys():
+    if lang and lang not in LANGS.keys():
         sys.stderr.write("I do not know about a language ending with "
                          "extension %s.\n"
                          "Please send a pull request adding this language to\n"
@@ -340,11 +345,10 @@ def main():
             output = args.ofile
             out = format_license(content, ext)  # format licese by file suffix
         else:
-            if not lang:
+            if lang:
                 output = "%s.%s" % (args.ofile, lang)
             else:
-                output = "%s" % args.ofile
-                lang = 'txt'
+                output = args.ofile
             out = format_license(content, lang)
 
         out.seek(0)
