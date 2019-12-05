@@ -10,10 +10,6 @@ Installation
 
 About what you'd expect::
 
-    easy_install lice
-
-or::
-
     pip install lice
 
 
@@ -133,6 +129,21 @@ Usage
 
 Changelog
 ---------
+
+**0.6**
+
+* Add PowerShell support (thanks to `danijeljw <https://github.com/danijeljw>`_)
+* Add Rust support (thanks to `alex179ohm <https://github.com/alex179ohm>`_)
+* Bugfixes (thanks to `ganziqim <https://github.com/ganziqim>`_)
+* Added support for Python 3.7 and 3.8, removed support for Python 3.4
+
+Tested against Python 2.7, 3.5, 3.6, 3.7, and 3.8.
+
+**0.5**
+
+* Add support for SCM alias for lisp-style comments (thanks to `ejmr <https://github.com/ejmr>`_)
+* Additional support for WTFPL and GPL2 licenses (thanks to `ejmr <https://github.com/ejmr>`_)
+* Support for Python 3.4 and 3.5 (thanks to `ejmr <https://github.com/ejmr>`_)
 
 **0.4**
 
