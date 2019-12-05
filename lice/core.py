@@ -66,10 +66,12 @@ LANGS = {
     "php": "c",
     "pl": "perl",
     "py": "unix",
+    "ps": "powershell",
     "rb": "ruby",
     "scm": "lisp",
     "sh": "unix",
     "txt": "text",
+    "rs": "rust",
 }
 
 LANG_CMT = {
@@ -84,9 +86,11 @@ LANG_CMT = {
     "lua": [u'--[[', u'', u'--]]'],
     "ml": [u'(*', u'', u'*)'],
     "perl": [u'=item', u'', u'=cut'],
+    "powershell": [u'<#', u'#', u'#>'],
     "ruby": [u'=begin', u'', u'=end'],
     "text": [u'', u'', u''],
     "unix": [u'', u'#', u''],
+    "rust": [u'', u'//' u''],
 }
 
 
